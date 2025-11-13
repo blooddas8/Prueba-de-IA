@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Descarga Épica</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #0a0e27;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Fondo animado de estrellas */
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.5); }
+        }
+
+        /* Partículas flotantes */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: linear-gradient(45deg, #00f5ff, #ff00ff);
+            border-radius: 50%;
+            animation: float-particle 15s infinite;
+            box-shadow: 0 0 20px rgba(0, 245, 255, 0.5);
+        }
+
+        @keyframes float-particle {
+            0%, 100% {
+                transform: translateY(100vh) translateX(0) scale(0);
+                opacity: 0;
+            }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% {
+                transform: translateY(-100vh) translateX(100px) scale(1.5);
+            }
+        }
+
+        /* Contenedor principal */
+        .container {
+            background: linear-gradient(145deg, rgba(20, 25, 60, 0.95), rgba(15, 20, 50, 0.95));
+            padding: 60px 50px;
+            border-radius: 30px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6),
+                        0 0 100px rgba(0, 245, 255, 0.2),
+                        inset 0 0 50px rgba(0, 245, 255, 0.05);
+            text-align: center;
+            max-width: 500px;
+            position: relative;
+            z-index: 10;
+            animation: containerGlow 3s ease-in-out infinite;
+            border: 2px solid rgba(0, 245, 255, 0.3);
+        }
+
+        @keyframes containerGlow {
+            0%, 100% { box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6), 0 0 100px rgba(0, 245, 255, 0.2), inset 0 0 50px rgba(0, 245, 255, 0.05); }
+            50% { box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6), 0 0 150px rgba(255, 0, 255, 0.3), inset 0 0 50px rgba(255, 0, 255, 0.05); }
+        }
+
+        /* Ícono 3D animado */
+        .icon-container {
+            margin-bottom: 35px;
+            perspective: 1000px;
+        }
+
+        .zip-icon {
+            width: 140px;
+            height: 140px;
+            margin: 0 auto;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotate3d 10s infinite linear;
+        }
+
+        @keyframes rotate3d {
+            0% { transform: rotateY(0deg) rotateX(10deg); }
+            100% { transform: rotateY(360deg) rotateX(10deg); }
+        }
+
+        .zip-icon svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 10px 30px rgba(0, 245, 255, 0.6));
+        }
+
+        /* Resplandor del ícono */
+        .icon-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 180px;
+            height: 180px;
+            background: radial-gradient(circle, rgba(0, 245, 255, 0.3), transparent 70%);
+            border-radius: 50%;
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+            50% { transform: translate(-50%, -50%) scale(1.3); opacity: 0.8; }
+        }
+
+        h1 {
+            color: #fff;
+            margin-bottom: 15px;
+            font-size: 36px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            background: linear-gradient(45deg, #00f5ff, #ff00ff, #00f5ff);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient-text 3s ease infinite;
+            text-shadow: 0 0 30px rgba(0, 245, 255, 0.5);
+        }
+
+        @keyframes gradient-text {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        p {
+            color: #a0aec0;
+            margin-bottom: 40px;
+            font-size: 17px;
+            line-height: 1.6;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Botón épico */
+        .download-btn {
+            background: linear-gradient(45deg, #00f5ff, #ff00ff);
+            color: white;
+            border: none;
+            padding: 20px 60px;
+            font-size: 20px;
+            font-weight: 800;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 15px 40px rgba(0, 245, 255, 0.4),
+                        0 0 50px rgba(255, 0, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .download-btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .download-btn:hover:before {
+            left: 100%;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 50px rgba(0, 245, 255, 0.6),
+                        0 0 80px rgba(255, 0, 255, 0.5);
+        }
+
+        .download-btn:active {
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        .download-btn span {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        /* Animación de descarga */
+        .downloading {
+            animation: rainbow 2s linear infinite;
+        }
+
+        @keyframes rainbow {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+
+        /* Barra de progreso futurista */
+        .progress-container {
+            margin-top: 30px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .progress-container.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00f5ff, #ff00ff, #00f5ff);
+            background-size: 200% 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 245, 255, 0.8);
+            animation: progress-shimmer 2s linear infinite;
+        }
+
+        @keyframes progress-shimmer {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 200% 0%; }
+        }
+
+        .progress-text {
+            color: #00f5ff;
+            font-size: 14px;
+            font-weight: 700;
+            margin-top: 10px;
+            text-shadow: 0 0 10px rgba(0, 245, 255, 0.8);
+        }
+
+        /* Mensaje de éxito explosivo */
+        .success-message {
+            margin-top: 25px;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.2), rgba(0, 245, 255, 0.2));
+            color: #00ff88;
+            border-radius: 15px;
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid rgba(0, 255, 136, 0.4);
+            font-weight: 700;
+            font-size: 16px;
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.3);
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.8);
+        }
+
+        .success-message.show {
+            opacity: 1;
+            transform: scale(1);
+            animation: success-pulse 0.6s ease;
+        }
+
+        @keyframes success-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Confeti */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #00f5ff;
+            position: absolute;
+            animation: confetti-fall 3s ease-out forwards;
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Efecto de partículas al hacer hover */
+        .particle-burst {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Estrellas de fondo -->
+    <div class="stars" id="stars"></div>
+    
+    <!-- Partículas flotantes -->
+    <div class="particles" id="particles"></div>
+
+    <div class="container">
+        <div class="icon-container">
+            <div class="icon-glow"></div>
+            <div class="zip-icon">
+                <svg viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="zipGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#00f5ff;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#ff00ff;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <rect x="15" y="5" width="70" height="95" rx="8" fill="url(#zipGradient)" opacity="0.9"/>
+                    <rect x="15" y="5" width="70" height="20" rx="8" fill="#00f5ff"/>
+                    <rect x="45" y="30" width="10" height="6" fill="#fff" opacity="0.9"/>
+                    <rect x="45" y="39" width="10" height="6" fill="#0a0e27"/>
+                    <rect x="45" y="48" width="10" height="6" fill="#fff" opacity="0.9"/>
+                    <rect x="45" y="57" width="10" height="6" fill="#0a0e27"/>
+                    <rect x="45" y="66" width="10" height="6" fill="#fff" opacity="0.9"/>
+                    <path d="M 42 78 L 50 90 L 58 78 Z" fill="#ffd700"/>
+                    <circle cx="50" cy="85" r="3" fill="#fff" opacity="0.6"/>
+                    <path d="M 50 90 L 45 110 L 55 110 Z" fill="#ffd700" opacity="0.8"/>
+                </svg>
+            </div>
+        </div>
+
+        <h1>Descarga Épica</h1>
+        <p>Prepárate para la experiencia de descarga más increíble</p>
+
+        <button class="download-btn" id="downloadBtn">
+            <span>
+                <span id="btnIcon">⚡</span>
+                <span id="btnText">Descargar Ahora</span>
+            </span>
+        </button>
+
+        <div class="progress-container" id="progressContainer">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-text" id="progressText">0%</div>
+        </div>
+
+        <div class="success-message" id="successMsg">
+            🎉 ¡DESCARGA COMPLETADA! 🎉
+        </div>
+    </div>
+
+    <script>
+        // Crear estrellas
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 200; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            starsContainer.appendChild(star);
+        }
+
+        // Crear partículas
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 30; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 15 + 's';
+            particle.style.animationDuration = (10 + Math.random() * 10) + 's';
+            particlesContainer.appendChild(particle);
+        }
+
+        const btn = document.getElementById('downloadBtn');
+        const progressContainer = document.getElementById('progressContainer');
+        const progressFill = document.getElementById('progressFill');
+        const progressText = document.getElementById('progressText');
+        const successMsg = document.getElementById('successMsg');
+        const btnIcon = document.getElementById('btnIcon');
+        const btnText = document.getElementById('btnText');
+
+        // Crear confeti
+        function createConfetti() {
+            const colors = ['#00f5ff', '#ff00ff', '#ffd700', '#00ff88'];
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.top = '-10px';
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.animationDelay = Math.random() * 0.5 + 's';
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => confetti.remove(), 3000);
+                }, i * 30);
+            }
+        }
+
+        btn.addEventListener('click', function() {
+            if (btn.disabled) return;
+            
+            btn.classList.add('downloading');
+            btn.disabled = true;
+            btnIcon.textContent = '⏳';
+            btnText.textContent = 'Descargando...';
+            
+            progressContainer.classList.add('show');
+            
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += 5;
+                progressFill.style.width = progress + '%';
+                progressText.textContent = progress + '%';
+                
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    
+                    setTimeout(() => {
+                        // Aquí coloca la URL real de tu archivo .zip
+                        const link = document.createElement('a');
+                        link.href = '#'; // Cambia esto por la URL de tu archivo
+                        link.download = 'archivo-epico.zip';
+                        link.click();
+                        
+                        // Efectos de éxito
+                        createConfetti();
+                        successMsg.classList.add('show');
+                        btnIcon.textContent = '✓';
+                        btnText.textContent = '¡Completado!';
+                        btn.style.background = 'linear-gradient(45deg, #00ff88, #00f5ff)';
+                        
+                        setTimeout(() => {
+                            btn.classList.remove('downloading');
+                            btn.disabled = false;
+                            btnIcon.textContent = '⚡';
+                            btnText.textContent = 'Descargar Ahora';
+                            btn.style.background = '';
+                            progressContainer.classList.remove('show');
+                            progressFill.style.width = '0%';
+                            progressText.textContent = '0%';
+                            successMsg.classList.remove('show');
+                        }, 4000);
+                    }, 300);
+                }
+            }, 100);
+        });
+
+        // Efecto de partículas al mover el mouse
+        document.addEventListener('mousemove', (e) => {
+            if (Math.random() > 0.95) {
+                const particle = document.createElement('div');
+                particle.className = 'particle-burst';
+                particle.style.left = e.clientX + 'px';
+                particle.style.top = e.clientY + 'px';
+                particle.style.background = Math.random() > 0.5 ? '#00f5ff' : '#ff00ff';
+                document.body.appendChild(particle);
+                
+                const angle = Math.random() * Math.PI * 2;
+                const velocity = 2 + Math.random() * 3;
+                let life = 30;
+                
+                const animate = () => {
+                    if (life <= 0) {
+                        particle.remove();
+                        return;
+                    }
+                    
+                    const x = parseFloat(particle.style.left);
+                    const y = parseFloat(particle.style.top);
+                    particle.style.left = (x + Math.cos(angle) * velocity) + 'px';
+                    particle.style.top = (y + Math.sin(angle) * velocity) + 'px';
+                    particle.style.opacity = life / 30;
+                    life--;
+                    
+                    requestAnimationFrame(animate);
+                };
+                
+                animate();
+            }
+        });
+    </script>
+</body>
+</html>
