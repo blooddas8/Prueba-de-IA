@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" type="image/jpeg" href="img_IA/NEXOR_AI.png">
+
+    <title>NEXOR IA</title>
+
+    <!-- Estilos del chat -->
+    <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+</head>
+
+<body>
+
+    <!-- Contenedor del chat si usas modo window no es necesario -->
+    <div id="n8n-chat"></div>
+
+    <script type="module">
+        import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+
+        createChat({
+    webhookUrl: 'http://localhost:5678/webhook/89e005a1-8b63-4cb6-b313-f4e71b19c4b2/chat',
+
+    webhookConfig: {
+        method: 'POST',
+        headers: {}
+    },
+
+    target: '#n8n-chat',
+    mode: 'window',
+    chatInputKey: 'chatInput',
+    chatSessionKey: 'sessionId',
+    loadPreviousSession: true,
+    metadata: {},
+    showWelcomeScreen: false,
+    defaultLanguage: 'es',
+
+    // 💬 Bienvenida personalizada con NEXOR
+    initialMessages: [
+        '👋 ¡Bienvenido a WebFusion!',
+        'Soy NEXOR, tu asesor virtual. ¿En qué puedo ayudarte hoy?'
+    ],
+
+    // 🌐 Textos y branding para WebFusion
+    i18n: {
+        es: {
+            title: 'Asistente WebFusion · NEXOR',
+            subtitle: 'Tu asesor inteligente en desarrollo web.',
+            footer: 'WebFusion · Soluciones Web Profesionales',
+            getStarted: 'Nueva conversación',
+            inputPlaceholder: 'Escribe tu consulta…',
+        },
+    },
+
+    enableStreaming: false,
+});
+
+    </script>
+
+</body>
+</html>
