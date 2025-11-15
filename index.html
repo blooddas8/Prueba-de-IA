@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="AI_style.css">
 
     <link rel="icon" type="image/jpeg" href="img_IA/NEXOR_AI.png">
 
@@ -11,6 +12,65 @@
 
     <!-- Estilos del chat -->
     <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+
+    <style>
+        :root {
+            /* COLORES BASE */
+            --chat--color--primary: #ffd700;
+            --chat--color--primary-shade-50: #e6c200;
+            --chat--color--primary--shade-100: #c9a600;
+
+            --chat--color--secondary: #000000;
+            --chat--color-secondary-shade-50: #111111;
+
+            /* Debe ser texto blanco real */
+            --chat--color-white: #ffffff;
+
+            /* Fondo del chat */
+            --chat--color-light: #1b1b1b;
+            --chat--color-light-shade-50: #2a2a2a;
+            --chat--color-light-shade-100: #3a3a3a;
+
+            --chat--color-medium: #d2d4d9;
+            --chat--color-dark: #000000;
+
+            --chat--color-disabled: #777980;
+            --chat--color-typing: #ffd700;
+
+            --chat--spacing: 1rem;
+            --chat--border-radius: 10px;
+            --chat--transition-duration: 0.15s;
+
+            --chat--window--width: 400px;
+            --chat--window--height: 600px;
+
+            /* HEADER */
+            --chat--header--background: #000000;
+            --chat--header--color: #ffd700;
+            --chat--header--border-bottom: 2px solid #ffd700;
+
+            /* MENSAJES BOT */
+            --chat--message--bot--background: rgba(255, 215, 0, 0.08);
+            --chat--message--bot--color: #f8f8f8;
+            --chat--message--bot--border: 1px solid #ffd700;
+
+            /* MENSAJES USUARIO */
+            --chat--message--user--background: #ffd700;
+            --chat--message--user--color: #000000;
+
+            --chat--message--pre--background: rgba(255, 215, 0, 0.15);
+
+            /* INPUT */
+            --chat--textarea--height: 50px;
+
+            /* BOTÓN flotante */
+            --chat--toggle--background: #ffd700;
+            --chat--toggle--hover--background: #e6c200;
+            --chat--toggle--active--background: #c9a600;
+            --chat--toggle--color: #000000;
+            --chat--toggle--size: 64px;
+        }
+    </style>
 </head>
 
 <body>
@@ -22,43 +82,44 @@
         import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
 
         createChat({
-    webhookUrl: 'http://localhost:5678/webhook/89e005a1-8b63-4cb6-b313-f4e71b19c4b2/chat',
+            webhookUrl: 'http://localhost:5678/webhook/89e005a1-8b63-4cb6-b313-f4e71b19c4b2/chat',
 
-    webhookConfig: {
-        method: 'POST',
-        headers: {}
-    },
+            webhookConfig: {
+                method: 'POST',
+                headers: {}
+            },
 
-    target: '#n8n-chat',
-    mode: 'window',
-    chatInputKey: 'chatInput',
-    chatSessionKey: 'sessionId',
-    loadPreviousSession: true,
-    metadata: {},
-    showWelcomeScreen: false,
-    defaultLanguage: 'es',
+            target: '#n8n-chat',
+            mode: 'window',
+            chatInputKey: 'chatInput',
+            chatSessionKey: 'sessionId',
+            loadPreviousSession: true,
+            metadata: {},
+            showWelcomeScreen: false,
+            defaultLanguage: 'es',
 
-    // 💬 Bienvenida personalizada con NEXOR
-    initialMessages: [
-        '👋 ¡Bienvenido a WebFusion!',
-        'Soy NEXOR, tu asesor virtual. ¿En qué puedo ayudarte hoy?'
-    ],
+            // 💬 Bienvenida personalizada con NEXOR
+            initialMessages: [
+                '👋 ¡Bienvenido a WebFusion!',
+                'Soy NEXOR, tu asesor virtual. ¿En qué puedo ayudarte hoy?'
+            ],
 
-    // 🌐 Textos y branding para WebFusion
-    i18n: {
-        es: {
-            title: 'Asistente WebFusion · NEXOR',
-            subtitle: 'Tu asesor inteligente en desarrollo web.',
-            footer: 'WebFusion · Soluciones Web Profesionales',
-            getStarted: 'Nueva conversación',
-            inputPlaceholder: 'Escribe tu consulta…',
-        },
-    },
+            // 🌐 Textos y branding para WebFusion
+            i18n: {
+                es: {
+                    title: 'Asistente NEXOR · de WebFusion',
+                    subtitle: 'Tu asesor inteligente en desarrollo web. pregunta lo que necesites.',
+                    footer: 'WebFusion · Soluciones Web Profesionales',
+                    getStarted: 'Nueva conversación',
+                    inputPlaceholder: 'Escribe tu consulta…',
+                },
+            },
 
-    enableStreaming: false,
-});
+            enableStreaming: false,
+        });
 
     </script>
 
 </body>
+
 </html>
